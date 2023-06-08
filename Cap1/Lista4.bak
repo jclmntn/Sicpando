@@ -1,0 +1,25 @@
+#lang sicp
+
+; Quero entender um pouco o exercício proposto na pg 40, de contar de quantas ma-
+; neiras se pode dar troco.
+
+(define (count-change amount)
+  (cc amount 5))
+
+(define (cc amount kinds-of-coins)
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (= kinds-of-coins 0)) 0)
+        (else (+ (cc amount
+                     (- kinds-of-coins 1))
+                 (cc (- amount
+                        (first-denomination kinds-of-coins))
+                     kinds-of-coins)))))
+
+; Os tipos de moeda estão ordenados do maior para o menor, segundo esse procedimento
+; ou função.
+(define (first-denomination kinds-of-coins)
+  (cond ((= kinds-of-coins 1) 1) ; Moeda de 1 centavo
+        ((= kinds-of-coins 2) 5) ; Moeda de 5 centavos
+        ((= kinds-of-coins 3) 10) ; Moeda de 10 centavos
+        ((= kinds-of coins 4) 25) ; Moeda de 25 centavos
+        ((= kinds-of-coins 5) 50))) ; Moeda de 50 centavos
